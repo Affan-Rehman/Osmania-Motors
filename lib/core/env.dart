@@ -8,7 +8,7 @@ String currency = 'Rs';
 String currencyName = 'Pakistani Rupee';
 String viewType = '';
 String? logo = '';
-String googleApiToken = 'AIzaSyDZnazv4f9z_aXrh9n67cWThyYXuH2Otac';
+String googleApiToken = '';
 
 //Map for translations
 Map<String, dynamic>? translations = {};
