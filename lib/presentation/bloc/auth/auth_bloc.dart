@@ -40,7 +40,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(LoadingAuthState());
 
       final user = await authRepository.signInWithApple();
-
       if (user.userEmail == '') {
         emit(ErrorAuthState(''));
       } else {

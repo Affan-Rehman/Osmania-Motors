@@ -1,5 +1,4 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +12,6 @@ import 'package:motors_app/data/repositories/auth_repository_impl.dart';
 import 'package:motors_app/data/repositories/car_detail_repository_impl.dart';
 import 'package:motors_app/data/repositories/filter_repository_impl.dart';
 import 'package:motors_app/data/repositories/main_page_repository_impl.dart';
-import 'package:motors_app/firebase_api.dart';
 import 'package:motors_app/firebase_options.dart';
 import 'package:motors_app/presentation/bloc/add_car/add_car_bloc.dart';
 import 'package:motors_app/presentation/bloc/auth/auth_bloc.dart';
@@ -28,22 +26,6 @@ import 'package:motors_app/presentation/bloc/splash/splash_bloc.dart';
 import 'package:motors_app/presentation/screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-// Future<AppSettings>
-getAppSettings() async {
-  try {
-    // print('getting App Settings');
-    // final response =
-    //     await DioSingleton().instance().get('$apiEndPoint/settings');
-    // logo = response.data['logo'];
-    logo =
-        'https://osmaniamotors.com/wp-content/uploads/2023/06/Osmania-Motors.png';
-    print('got $logo');
-    // return AppSettings.fromJson(response.data);
-  } on DioException catch (e) {
-    throw Exception(e.response);
-  }
-}
 
 late Box<Brand> brandsBox;
 
@@ -71,10 +53,8 @@ void main() async {
   // print('City: $city');
   preferences.setString('city', city ?? '');
 
-  getAppSettings().then(
-    (value) => runApp(
-      MyApp(),
-    ),
+  runApp(
+    MyApp(),
   );
 }
 

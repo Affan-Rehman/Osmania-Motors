@@ -103,12 +103,17 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<User> signInWithApple() async {
     try {
-      final credential = await SignInWithApple.getAppleIDCredential(
+      final AuthorizationCredentialAppleID credential =
+          await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
       );
+      log((credential.givenName == null).toString());
+      log((credential.familyName == null).toString());
+      log((credential.email == null).toString());
+
       if (credential != null) {
         final User user = User(
           ID: credential.identityToken,
@@ -120,7 +125,7 @@ class AuthRepositoryImpl extends AuthRepository {
           await DioSingleton().instance().post(
             'https://osmaniamotors.com/wp-content/plugins/osmania_api/index.php',
             data: {
-              'google_login': credential.email,
+              'apple_login': credential.email,
               'name': credential.givenName,
               'token': credential.identityToken,
             },
@@ -129,6 +134,7 @@ class AuthRepositoryImpl extends AuthRepository {
           log(e.toString());
         }
         await _updatePreferences(user);
+
         return user;
       } else {
         return User(userEmail: '');

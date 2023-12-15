@@ -68,33 +68,6 @@ class SplashScreen extends StatelessWidget {
           ),
         ),
         // Logo Motors
-        Padding(
-          padding: const EdgeInsets.only(top: 50.0),
-          child: SafeArea(
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: logo?.isNotEmpty ?? '' != '' || logo != null
-                  ? Image(
-                      image: NetworkImage(logo!),
-                      errorBuilder: (BuildContext context, Object object,
-                          StackTrace? stackTrace) {
-                        return const Image(
-                          image: AssetImage('assets/images/logo-white.png'),
-                          width: 190,
-                          height: 150,
-                        );
-                      },
-                      width: 190,
-                      height: 150,
-                    )
-                  : const Image(
-                      image: AssetImage('assets/images/logo-white.png'),
-                      width: 190,
-                      height: 150,
-                    ),
-            ),
-          ),
-        ),
         // Count listings
         Padding(
           padding: const EdgeInsets.only(bottom: 60.0),

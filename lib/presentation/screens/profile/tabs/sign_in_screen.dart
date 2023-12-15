@@ -337,7 +337,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ? null
                           : () {
                               BlocProvider.of<AuthBloc>(context).add(
-                                SignInWithGoogleEvent(), // Trigger Apple sign-in event
+                                SignInWithAppleEvent(), // Trigger Apple sign-in event
                               );
                             },
                       child: Padding(
