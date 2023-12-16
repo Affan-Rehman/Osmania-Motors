@@ -9,6 +9,7 @@ import 'package:motors_app/core/env.dart';
 import 'package:motors_app/data/datasources/auth_datasource.dart';
 import 'package:motors_app/data/models/auth/auth.dart';
 import 'package:motors_app/data/models/user/user.dart';
+import 'package:motors_app/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 abstract class AuthRepository {
@@ -110,10 +111,6 @@ class AuthRepositoryImpl extends AuthRepository {
           AppleIDAuthorizationScopes.fullName,
         ],
       );
-      log((credential.givenName == null).toString());
-      log((credential.familyName == null).toString());
-      log((credential.email == null).toString());
-
       if (credential != null) {
         final User user = User(
           ID: credential.identityToken,
@@ -200,12 +197,13 @@ class AuthRepositoryImpl extends AuthRepository {
     await preferences.remove('userId');
     await preferences.remove('password');
     await preferences.remove('userName');
+    appleLogin = false;
   }
 
   @override
   Future<UserInfo> getUserInfo(id) async {
     UserInfo userResponse = await authDataSource.getUserInfo(id);
-
+    log(userResponse.toJson().toString());
     return userResponse;
   }
 

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:motors_app/core/env.dart';
 import 'package:motors_app/data/models/auth/auth.dart';
 import 'package:motors_app/data/repositories/auth_repository_impl.dart';
+import 'package:motors_app/presentation/bloc/profile/profile_bloc.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -33,6 +34,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(ErrorAuthState(''));
       } else {
         emit(SuccessAuthState());
+        appleLogin = false;
       }
     });
 
@@ -44,6 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(ErrorAuthState(''));
       } else {
         emit(SuccessAuthState());
+        appleLogin = true;
       }
     });
 
@@ -63,10 +66,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (auth.code == 200) {
         emit(SuccessAuthState());
+        appleLogin = false;
       } else {
         emit(ErrorSignUpState(auth.message));
       }
-      emit(LoadingAuthState());
     });
 
     on<UpdateProfileEvent>((event, emit) async {

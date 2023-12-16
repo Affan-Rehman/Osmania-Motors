@@ -16,6 +16,8 @@
 		<string>ufa.stylemixthemes.motors</string>
 		<key>CFBundleInfoDictionaryVersion</key>
 		<string>6.0</string>
+		<key>API_KEY</key>
+		<string>AIzaSyA286IUn6lu70V_LWe8xz_DE9Gw3k5bBPg</string>
 		<key>CFBundleName</key>
 		<string>motors_app</string>
 		<key>CFBundlePackageType</key>

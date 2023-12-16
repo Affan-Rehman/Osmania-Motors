@@ -113,11 +113,13 @@ class AuthRemoteDataSource implements AuthDataSource {
   @override
   Future<UserInfo> getUserInfo(id) async {
     try {
+      log('okokok: $apiEndPoint/private-user/$id');
       final response =
           await DioSingleton().instance().get('$apiEndPoint/private-user/$id');
 
       return UserInfo.fromJson(response.data);
     } on DioError catch (e) {
+      log("ok" + e.toString());
       throw Exception(e.response);
     }
   }

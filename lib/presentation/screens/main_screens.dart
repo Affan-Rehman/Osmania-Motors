@@ -139,6 +139,7 @@ class _MainScreenState extends State<MainScreen> {
                     )
                   : _selectedIndex == 1 && token != ''
                       ? AppBar(
+                          scrolledUnderElevation: 0,
                           leading: AppBarIcon(
                             iconData: IconsMotors.arrow_back,
                             onTap: () {

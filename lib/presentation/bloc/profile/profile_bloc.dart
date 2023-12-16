@@ -14,13 +14,15 @@ part 'profile_event.dart';
 
 part 'profile_state.dart';
 
+bool appleLogin = true;
+
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(this.authRepository) : super(InitialProfileState()) {
     on<LoadProfileEvent>((event, emit) async {
       bool isEmptyFavourites = true;
       bool isEmptyListings = true;
       try {
-        final UserInfo userInfo = await authRepository.getUserInfo(event.id);
+        UserInfo userInfo = await authRepository.getUserInfo(event.id);
 
         if (userInfo.favourites == null || userInfo.favourites!.isEmpty) {
           isEmptyFavourites = true;
@@ -33,10 +35,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         } else {
           isEmptyListings = false;
         }
+        if (appleLogin) {
+          userInfo.author.name = "";
+          userInfo.author.lastName = "";
+        }
 
         emit(LoadedProfileState(userInfo, isEmptyFavourites, isEmptyListings));
       } on DioError catch (e) {
-        throw Exception(e.response);
+        log(e.toString());
       }
     });
 
